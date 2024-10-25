@@ -1,9 +1,6 @@
 import React from 'react';
 
 function RecommendationsList({ recommendations }) {
-  if (recommendations.length === 0) {
-    return <p>Enter a movie name for a recommendation!</p>;
-  }
 
   return (
     <ul className="recommendations-list">
