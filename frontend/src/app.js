@@ -1,27 +1,49 @@
 import React, { useState } from 'react';
-import InputForm from './components/InputForm';
+import MovieCarousel from './components/MovieCarousel'; 
+import MovieGallery from './components/MovieGallery'; 
+import SearchBar from './components/SearchBar'; 
 import RecommendationsList from './components/RecommendationsList';
-import axios from 'axios';
 import './app.css';
+import axios from 'axios';
 
 function App() {
   const [recommendations, setRecommendations] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [movies, setMovies] = useState([]); 
 
-  const handleMovieSubmit = (movie) => {
-    // Call the Flask backend API to get movie recommendations
-    axios.post('http://localhost:5000/recommend', { movie })
+  const handleMovieSelect = (movie) => {
+    setSelectedMovie(movie);
+    
+    axios.post('http://localhost:5000/recommend', { movie: movie.title })
       .then((response) => {
         setRecommendations(response.data.recommendations);
       })
       .catch((error) => {
-        console.error("There was an error fetching the recommendations!", error);
+        console.error("Error fetching recommendations:", error);
       });
+  };
+
+  const handleSearchChange = (search) => {
+    setSearchTerm(search);
   };
 
   return (
     <div className="App">
-      <h1>Movie Recommendation App</h1>
-      <InputForm onMovieSubmit={handleMovieSubmit} />
+      <SearchBar onMovieSelect={handleMovieSelect} movies={movies} onSearchChange={handleSearchChange} />
+
+      <div className="instruction-message">
+        Click on a movie to get recommendations!
+      </div>
+
+      {searchTerm === '' ? (
+        <MovieCarousel onMovieSelect={handleMovieSelect} />
+      ) : (
+        <MovieGallery searchTerm={searchTerm} onMovieSelect={handleMovieSelect} setMovies={setMovies} />
+      )}
+
+
+      {selectedMovie && <h2>Recommendations for {selectedMovie.title}</h2>}
       <RecommendationsList recommendations={recommendations} />
     </div>
   );
