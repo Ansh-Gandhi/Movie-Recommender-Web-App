@@ -5,9 +5,17 @@
   box-sizing: border-box;
 }
 
+.app-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f5f5f5;
+  background-color: #e3f2fd; /* Pastel blue background */
   color: #333;
 }
 
@@ -15,13 +23,17 @@ h1 {
   text-align: center;
   font-size: 3rem;
   margin-top: 20px;
-  color: #2c3e50;
+  color: #1e88e5; /* Darker pastel blue */
+  text-shadow: 1px 1px 2px #90caf9; /* Light blue shadow */
 }
 
 .App {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  background-color: #ffffff; /* White background for contrast */
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 /* Search Bar Styling */
@@ -35,20 +47,22 @@ h1 {
   width: 50%;
   padding: 10px 15px;
   font-size: 1.2rem;
-  border: 2px solid #ccc;
+  border: 2px solid #90caf9; /* Light pastel blue border */
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #bbdefb; /* Light blue background */
+  color: #1e88e5;
   transition: all 0.3s ease;
 }
 
 .search-bar input:focus {
-  border-color: #3498db;
+  border-color: #1e88e5; /* Darker pastel blue border on focus */
   outline: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .search-bar input::placeholder {
-  color: #999;
+  color: #64b5f6; /* Light blue placeholder */
 }
 
 /* Instruction Message */
@@ -56,7 +70,7 @@ h1 {
   text-align: center;
   font-size: 1.5rem;
   margin: 20px 0;
-
+  color: #1e88e5;
 }
 
 /* Movie Gallery */
@@ -73,31 +87,32 @@ h1 {
   flex: 0 0 150px; 
   text-align: center;
   position: relative;
-  cursor: pointer; 
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 10px;
+}
+
+.movie-gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .movie-gallery-poster {
   width: 100%; 
   height: auto;
   border-radius: 10px; 
-  transition: transform 0.2s, box-shadow 0.2s; 
 }
 
-.movie-gallery-poster:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
-}
-
-
-.movie-poster:hover {
-  transform: scale(1.1); 
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.movie-gallery.grid {
-  display: grid; 
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
-  gap: 15px; 
+.no-poster {
+  width: 100%;
+  height: auto;
+  background-color: #90caf9; /* Light blue background for no poster */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e88e5;
+  padding: 20px;
 }
 
 /* Recommendations List */
@@ -109,31 +124,30 @@ ul.recommendations-list {
 }
 
 ul.recommendations-list li {
-  background-color: #fff;
+  background-color: #bbdefb; /* Light blue background */
   padding: 15px;
   margin: 10px 0;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.2s; 
+  transition: background-color 0.2s;
 }
 
 ul.recommendations-list li:hover {
-  background-color: #f1c40f; 
+  background-color: #64b5f6; /* Darker blue on hover */
 }
 
 ul.recommendations-list li strong {
-  color: #e74c3c;
+  color: #1e88e5; /* Darker pastel blue */
 }
 
 h2 {
   text-align: center;
   font-size: 2rem;
   margin-top: 40px;
-  color: #34495e;
+  color: #1e88e5;
 }
 
-/* MovieCarousel*/
-
+/* MovieCarousel */
 .carousel-container {
   display: flex;
   align-items: center;
@@ -147,6 +161,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
 }
 
 .movie-list {
@@ -155,27 +170,40 @@ h2 {
 }
 
 .movie-item {
-  flex: 0 0 20%; 
-  margin: 0 5px;
+  flex: 0 0 auto; 
+  margin: 0 2px; 
   cursor: pointer;
-  opacity: 0.5; 
-  transform: scale(0.8); 
+  transform: scale(0.85); 
   transition: transform 0.3s, opacity 0.3s; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.highlighted {
-  opacity: 1;
-  transform: scale(1); 
-  border: 2px solid #ff9900;
+.movie-item:hover {
+  transform: scale(1);
+}
+
+.movie-item p {
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 150px; 
+  font-size: 0.9rem; 
+  line-height: 1.2; 
+  margin-top: 5px; 
+  text-align: center; 
+  color: #1e88e5;
 }
 
 .movie-poster {
   width: 100%;
   border-radius: 5px;
+  max-width: 150px; 
+  max-height: 225px; 
 }
 
 .carousel-button {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -186,7 +214,7 @@ h2 {
 }
 
 .carousel-button:hover {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .carousel-button.prev {
@@ -196,4 +224,3 @@ h2 {
 .carousel-button.next {
   right: 10px;
 }
-
