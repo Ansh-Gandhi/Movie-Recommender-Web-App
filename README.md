@@ -6,4 +6,6 @@
 
 - Made reusable **React components** to ensure modularity and maintainability, streamlining the development of features such as the search bar, the movie carousel, and the movie gallery
 
+View a preview of the web app in the following video:
+
 [![Watch the video](movie_recommender_thumbnail.png)](https://youtu.be/itb07SSLv7Q?si=p_oovzmtQ9ONqIKp)
